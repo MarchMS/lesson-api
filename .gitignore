@@ -1,0 +1,26 @@
+# Node
+node_modules/
+dist/
+.env
+*.log
+npm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# Mac
+.DS_Store
+
+# Docker
+.env.local
+.env.*.local
+docker-compose.override.yml
+
+# IDEs
+.vscode/
+.idea/
+*.sw?
+
+# Logs
+logs/
+*.log
