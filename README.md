@@ -8,7 +8,7 @@ REST API для управления занятиями, учителями и �
 
 ### 📦 Требования
 
-- [Node.js](https://nodejs.org/) `>=18`
+- [Node.js](https://nodejs.org/) `>=16`
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 

@@ -4,10 +4,10 @@ import Lesson from './lesson.model';
 import Teacher from './teacher.model';
 import Student from './student.model';
 
-// 🧑‍🏫 Lesson <-> Teacher
+
 Lesson.belongsToMany(Teacher, {
   through: 'lesson_teachers',
-  as: 'teachers', // 👈 обязательно, чтобы lesson.teachers работал
+  as: 'teachers',
   foreignKey: 'lesson_id',
   otherKey: 'teacher_id',
   timestamps: false,
@@ -15,16 +15,16 @@ Lesson.belongsToMany(Teacher, {
 
 Teacher.belongsToMany(Lesson, {
   through: 'lesson_teachers',
-  as: 'lessons', // 👈 teacher.lessons
+  as: 'lessons',
   foreignKey: 'teacher_id',
   otherKey: 'lesson_id',
   timestamps: false,
 });
 
-// 👩‍🎓 Lesson <-> Student
+
 Lesson.belongsToMany(Student, {
   through: 'lesson_students',
-  as: 'students', // 👈 обязательно, чтобы lesson.students работал
+  as: 'students',
   foreignKey: 'lesson_id',
   otherKey: 'student_id',
   timestamps: false,
@@ -32,7 +32,7 @@ Lesson.belongsToMany(Student, {
 
 Student.belongsToMany(Lesson, {
   through: 'lesson_students',
-  as: 'lessons', // 👈 student.lessons
+  as: 'lessons',
   foreignKey: 'student_id',
   otherKey: 'lesson_id',
   timestamps: false,

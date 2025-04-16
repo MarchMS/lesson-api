@@ -3,7 +3,7 @@ import Lesson from '../../db/models/lesson.model';
 import Teacher from '../../db/models/teacher.model';
 import Student from '../../db/models/student.model';
 import { handleDate } from './helpers/handleDate';
-import { handleStudentsCount } from './helpers/handleStudentsCount';
+import { filterByStudentCount } from './helpers/filterByStudentCount';
 
 export const getLessonsService = async (
   filters: {
@@ -18,17 +18,14 @@ export const getLessonsService = async (
   const { date, status, teacherIds, studentsCount } = filters;
   const whereConditions: any = {};
 
-  // 📅 Обработка даты (через handleDate)
   if (date) {
     Object.assign(whereConditions, handleDate(date));
   }
 
-  // ✅ Статус (0 или 1) — можно смело использовать
   if (status !== undefined) {
     whereConditions.status = status;
   }
 
-  // 👨‍🏫 Фильтр по учителям (если есть)
   const teacherFilter = teacherIds
     ? { id: { [Op.in]: teacherIds.split(',').map(Number) } }
     : undefined;
@@ -63,28 +60,12 @@ export const getLessonsService = async (
     throw error;
   }
 
-  // 🧮 Фильтрация по количеству учеников
   let filteredLessons = lessons;
 
   if (studentsCount) {
-    const countCondition = handleStudentsCount(studentsCount);
-
-    filteredLessons = lessons.filter((lesson: any) => {
-      const studentCount = (lesson.students || []).length;
-
-      if (countCondition.type === 'exact') {
-        return studentCount === countCondition.value;
-      }
-
-      if (countCondition.type === 'range') {
-        return studentCount >= countCondition.min && studentCount <= countCondition.max;
-      }
-
-      return true;
-    });
+    filteredLessons = filterByStudentCount(lessons, studentsCount);
   }
 
-  // 🎨 Приводим к нужному формату
   const formattedLessons = filteredLessons.map((lesson: any) => ({
     id: lesson.id,
     date: lesson.date,

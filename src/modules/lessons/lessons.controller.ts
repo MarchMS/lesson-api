@@ -23,6 +23,6 @@ export const getLessonsController = async (req: Request, res: Response, next: Ne
 
     res.status(200).json(lessons);
   } catch (error) {
-    next(error); // Pass the error to the next middleware
+    next(error);
   }
 };
