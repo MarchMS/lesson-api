@@ -19,7 +19,7 @@ REST API для управления занятиями, учителями и �
 1. Клонируйте репозиторий:
 
 ```bash
-git clone https://github.com/your-username/lesson-api.git
+git clone https://github.com/MarchMS/lesson-api.git
 cd lesson-api
 ```
 
